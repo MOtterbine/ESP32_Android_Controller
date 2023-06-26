@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ESP32_Android_Controller.ViewModels"
+             Title="{Binding Title}" 
+             NavigationPage.HasNavigationBar="True"
+             xmlns:Behaviors="clr-namespace:ESP32_Android_Controller.Behaviors;assembly=ESP32_Android_Controller"
+             xmlns:Converters="clr-namespace:ESP32_Android_Controller.Converters;assembly=ESP32_Android_Controller"
+             BackgroundColor="#000"
+             x:Class="ESP32_Android_Controller.SettingsPage">
+    
+     <ContentPage.Resources>
+        <Converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        <Converters:StdStringCtrlConverter x:Key="StdStringCtrlConverter" />
+
+        <Style TargetType="Label" BasedOn="{StaticResource grid-label}">
+            <Setter Property="TextColor" Value="{StaticResource Dark}" />
+        </Style>
+
+        <Style TargetType="Button" BasedOn="{StaticResource launch-button}">
+            <Setter Property="WidthRequest" Value="90" />
+        </Style>
+
+
+    </ContentPage.Resources>
+    
+    <ContentPage.BindingContext>
+        <vm:SettingsViewModel />
+    </ContentPage.BindingContext>
+
+
+
+    <Frame Style="{StaticResource page-frame}" BackgroundColor="#9a9a9a">
+
+              <!--  <Frame CornerRadius="0" Margin="0" Padding="0" >-->
+            <AbsoluteLayout >
+                <ScrollView AbsoluteLayout.LayoutBounds=".5,.5,1,1" AbsoluteLayout.LayoutFlags="All">
+                    <StackLayout>
+                        <Grid  Padding="0" Margin="0" RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <!-- Viewer -->
+                            <Grid Grid.Row="1" VerticalOptions="StartAndExpand" IsVisible="{Binding IsEditing, Converter={StaticResource InvertedBoolConverter}}" 
+                                    BackgroundColor="#9a9a9a" RowSpacing="15" Padding="0,25,5,0">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                                    <ColumnDefinition Width="10*"></ColumnDefinition>
+                                    <ColumnDefinition Width="15*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="0,0,0,30" FontSize="20" FontAttributes="Bold">Current Settings</Label>
+
+                            <!-- RF Type (WiFi vs Bluetooth) -->
+                                <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Spacing="0" Margin="5,0,0,0" Padding="0">
+                                    <Label FontAttributes="Bold" Grid.Row="1"  Grid.Column="0" VerticalOptions="Center" Margin="0">Device Type</Label>
+                                </StackLayout>
+                                <StackLayout Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Spacing="0" Margin="0" Padding="0">
+                                    <Label Text="{Binding SelectedCommMethod}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Style="{DynamicResource settings-label}"></Label>
+                                </StackLayout>
+
+                                <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" RowSpacing="15" Margin="0" Padding="0" ColumnSpacing="0">
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20*"></ColumnDefinition>
+                                        <ColumnDefinition Width="10*"></ColumnDefinition>
+                                        <ColumnDefinition Width="15*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <!-- Bluetooth -->
+                                    <Label IsVisible="{Binding IsBluetooth}" FontAttributes="Bold" VerticalOptions="Center" Grid.Row="0" Grid.Column="0" Margin="5,0,0,-10">Device</Label>
+                                    <Label  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"  Padding="0" Margin="7,0,0,-10" IsVisible="{Binding IsBluetooth}"  Text="{Binding PresetBluetoothDevice, Converter={StaticResource StdStringCtrlConverter}}" Style="{DynamicResource settings-label}"></Label>
+
+                                    <Label IsVisible="{Binding IsBluetooth}" HeightRequest="0" LineHeight="0" Grid.Row="1" Grid.Column="0"></Label>
+                                    <Label IsVisible="{Binding IsBluetooth}" Margin="0,0,0,0" HeightRequest="0" LineHeight="0" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"></Label>
+
+                                    <!-- WiFi -->
+                                    <!-- Host/IP Address -->
+                                    <Label IsVisible="{Binding IsBluetooth, Converter={StaticResource InvertedBoolConverter}}" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" Margin="5,0,0,0" VerticalTextAlignment="Center" >Host</Label>
+                                    <Label IsVisible="{Binding IsBluetooth, Converter={StaticResource InvertedBoolConverter}}" Text="{Binding IPAddress}"  Style="{DynamicResource settings-label}" VerticalOptions="Center" VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,0" ></Label>
+
+                                    <!-- IP Port -->
+                                    <Label IsVisible="{Binding IsBluetooth, Converter={StaticResource InvertedBoolConverter}}" x:Name="IPAddressLabel"  FontAttributes="Bold" Grid.Row="1" Grid.Column="0" VerticalOptions="Center" VerticalTextAlignment="Center" Margin="5,0,0,0" >Port</Label>
+                                    <Label IsVisible="{Binding IsBluetooth, Converter={StaticResource InvertedBoolConverter}}" x:Name="PortLabel"  Text="{Binding IPPort}"  Style="{DynamicResource settings-label}" VerticalOptions="Center" VerticalTextAlignment="Center" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="8,0,0,5" Padding="0"/>
+
+                                </Grid>
+                                
+                                
+                                <StackLayout Spacing="10" Orientation="Horizontal" HorizontalOptions="Center" Grid.Row="3" Grid.ColumnSpan="3" Margin="0,40,0,20" Padding="0" >
+                                    <Button  HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding EditSaveButtonText}" Command="{Binding EditSaveCommand}" TextTransform="None"></Button>
+                                    <Button IsVisible="{Binding IsEditing, Converter={StaticResource InvertedBoolConverter}}" HorizontalOptions="Center" VerticalOptions="Center" Text="Back" TextTransform="None" Command="{Binding NavigateHomeCommand}"></Button>
+                                </StackLayout>
+
+                            </Grid>
+
+                            <!-- Editor -->
+                            <Grid Grid.Row="1" VerticalOptions="StartAndExpand" IsVisible="{Binding IsEditing}" BackgroundColor="#9a9a9a"
+                                RowSpacing="0" ColumnSpacing="0" Padding="0,25,10,0">
+
+                                <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                                    <ColumnDefinition Width="10*"></ColumnDefinition>
+                                    <ColumnDefinition Width="15*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+
+                                <Label Grid.Row="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="0,0,0,30" FontSize="20" FontAttributes="Bold">Select Options</Label>
+                                <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" RowSpacing="1" Margin="0" Padding="0">
+
+                                    <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                      <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20*"></ColumnDefinition>
+                                        <ColumnDefinition Width="10*"></ColumnDefinition>
+                                        <ColumnDefinition Width="15*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- RF Type (WiFi vs Bluetooth) -->
+                                    <!-- Edit -->
+                                    <Label Grid.Row="0" Grid.Column="0" VerticalOptions="Center" Margin="5,0,0,0">Device Type</Label>
+                                    <Picker Margin="0"  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Title="OBD2 Adapter Type"  ItemDisplayBinding="{Binding .}"  SelectedItem="{Binding SelectedCommMethod}"  Style="{StaticResource nested-settings-picker}">
+                                        
+                                        <Picker.Items>
+                                            <x:String>Bluetooth</x:String>
+                                            <x:String>WiFi</x:String>
+                                        </Picker.Items>
+                                    </Picker>
+
+                                    <!-- Bluetooth -->
+                                    <Label IsVisible="{Binding IsBluetooth}" VerticalOptions="Center" Grid.Row="2" Grid.Column="0" Margin="5,0,0,0">Device</Label>
+                                    <!-- Edit -->
+                                    <Picker IsVisible="{Binding IsBluetooth}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Title="Bluetooth Device" ItemsSource="{Binding DeviceList}" ItemDisplayBinding="{Binding .}" SelectedItem="{Binding SelectedBluetoothDevice}" Style="{StaticResource nested-settings-picker}">
+                                    </Picker>
+
+                                    <!-- Host/IP Address -->
+                                    <Label IsVisible="{Binding IsBluetooth, Converter={StaticResource InvertedBoolConverter}}" FontAttributes="Bold" Grid.Row="2" Grid.Column="0" VerticalOptions="Center" Margin="5,0,0,0" >Host</Label>
+                                    <Entry IsVisible="{Binding IsBluetooth, Converter={StaticResource InvertedBoolConverter}}" x:Name="IPAddress" Text="{Binding IPAddress}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" ></Entry>
+                                    <!-- IP Port -->
+                                    <Label IsVisible="{Binding IsBluetooth, Converter={StaticResource InvertedBoolConverter}}" FontAttributes="Bold" Grid.Row="3" Grid.Column="0" VerticalOptions="Center" Margin="5,0,0,0" >Port</Label>
+                                    <Entry IsVisible="{Binding IsBluetooth, Converter={StaticResource InvertedBoolConverter}}" x:Name="Port"  Text="{Binding IPPort}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
+ 
+                                </Grid>
+
+
+                                <Button Grid.Row="2" Grid.ColumnSpan="3" Margin="0,40,0,20" HorizontalOptions="Center" VerticalOptions="Start" Text="{Binding EditSaveButtonText}" Command="{Binding EditSaveCommand}" TextTransform="None"></Button>
+
+                            </Grid>
+
+
+                        </Grid>
+
+                    </StackLayout>
+                </ScrollView>
+
+                        <StackLayout IsVisible="{Binding IsBusy}" BackgroundColor="#80FFFFFF" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional" >
+                            <ActivityIndicator IsRunning="{Binding IsBusy}"  VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+            </AbsoluteLayout>
+                <!--</Frame>-->
+    </Frame>
+
+</ContentPage>

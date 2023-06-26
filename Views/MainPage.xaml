@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ESP32_Android_Controller.MainPage"
+             xmlns:vm="clr-namespace:ESP32_Android_Controller.ViewModels"
+             xmlns:Converters="clr-namespace:ESP32_Android_Controller.Converters;assembly=ESP32_Android_Controller"
+             xmlns:ctrls="clr-namespace:Controls">
+
+
+    <ContentPage.BindingContext>
+        <vm:MainPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        
+        <Converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+
+        <Style TargetType="ctrls:HapticButton">
+            <Setter Property="WidthRequest" Value="85"></Setter>
+            <Setter Property="HeightRequest" Value="50"></Setter>
+            <Setter Property="Margin" Value="2"></Setter>
+            <Setter Property="Padding" Value="2"></Setter>
+            <Setter Property="CornerRadius" Value="10"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+        </Style>
+        
+        <Style x:Key="send-button" TargetType="ctrls:HapticButton">
+            <Setter Property="WidthRequest" Value="85"></Setter>
+            <Setter Property="HeightRequest" Value="50"></Setter>
+            <Setter Property="Margin" Value="2"></Setter>
+            <Setter Property="Padding" Value="0"></Setter>
+            <Setter Property="CornerRadius" Value="10"></Setter>
+            <Setter Property="BackgroundColor" Value="#00000000"></Setter>
+            <Setter Property="TextColor" Value="#222"></Setter>
+            <Setter Property="BorderColor" Value="#222"></Setter>
+            <Setter Property="BorderWidth" Value="1"></Setter>
+            <Setter Property="FontAttributes" Value="Bold"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+        </Style>
+        
+        <Style TargetType="Picker">
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontAttributes" Value="Bold"></Setter>
+            <Setter Property="WidthRequest" Value="-1"></Setter>
+            <Setter Property="HeightRequest" Value="-1"></Setter>
+            <Setter Property="Margin" Value="5,2,0,0"></Setter>
+            <Setter Property="TextColor" Value="#222"></Setter>
+            <Setter Property="TitleColor" Value="#222"></Setter>
+        </Style>
+    </ContentPage.Resources>
+    <AbsoluteLayout>
+        <ScrollView AbsoluteLayout.LayoutBounds=".5,.5,1,1" AbsoluteLayout.LayoutFlags="All">
+        <VerticalStackLayout
+            Spacing="15"
+            Padding="15,15"
+            VerticalOptions="Start">
+
+            <Image x:Name="bot"
+                Source="dotnet_bot.png"
+                SemanticProperties.Description="Dot net bot waving hi to you!"
+                HeightRequest="50"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="{Binding BigDescription}"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="{Binding SmallDescription}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="18"
+                HorizontalOptions="Center" />
+
+            <Label Padding="0" Margin="0" FontAttributes="Bold">Response</Label>
+            <Frame Padding="0,10" Margin="0" >
+                <HorizontalStackLayout HorizontalOptions="StartAndExpand">
+                    <Label Text="{Binding StatusDescription}"  Padding="5,0"
+                        SemanticProperties.HeadingLevel="Level2"
+                        SemanticProperties.Description="Status Description"
+                        FontSize="18" FontAttributes="Bold"
+                       />
+                </HorizontalStackLayout>
+                 </Frame>
+            
+                <!-- Dropdown -->
+                <VerticalStackLayout HorizontalOptions="Fill">
+                    <HorizontalStackLayout HorizontalOptions="Center">
+                        <VerticalStackLayout>
+                             <Label Padding="0" Margin="0" FontAttributes="Bold">Command To Send</Label>
+                                 <HorizontalStackLayout>
+                                 <Frame Padding="0" Margin="0" BackgroundColor="#ddd">
+                                     <Picker x:Name="picker" WidthRequest="200" IsEnabled="{Binding InputIsBlocked, Converter={StaticResource InvertedBoolConverter}, Mode=OneWay}" 
+                                             Title="Command" ItemsSource="{Binding CommandList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedCommand}">
+                                     </Picker>
+                                 </Frame>
+                                 <ctrls:HapticButton HorizontalOptions="EndAndExpand"  IsEnabled="{Binding InputIsBlocked, Converter={StaticResource InvertedBoolConverter}}"
+                                                     Vibrate="False" Text="Send" Command="{Binding SendCommand}" SemanticProperties.Hint="Turn LED on" Style="{StaticResource send-button}" />
+                             </HorizontalStackLayout>
+                         </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+                
+            <!--<VerticalStackLayout HorizontalOptions="FillAndExpand" BackgroundColor="red">
+            </VerticalStackLayout>-->
+
+            <!--<FlexLayout HorizontalOptions="Center" AlignItems="Stretch" AlignContent="SpaceAround" VerticalOptions="Center" >
+                <ctrls:HapticButton IsEnabled="{Binding InputIsBlocked, Converter={StaticResource InvertedBoolConverter}}" Text="Send Command" Command="{Binding LEDOnCommand}" SemanticProperties.Hint="Turn LED on" />
+                <ctrls:HapticButton IsEnabled="{Binding InputIsBlocked, Converter={StaticResource InvertedBoolConverter}}"  Vibrate="False"  Text="Setup" Command="{Binding GoToSettingsPageCommand}" SemanticProperties.Hint="Go to settings"/>
+            </FlexLayout>-->
+            <FlexLayout HorizontalOptions="Center" AlignItems="Stretch" AlignContent="SpaceAround" VerticalOptions="Center" >
+                    <ctrls:HapticButton IsEnabled="{Binding InputIsBlocked, Converter={StaticResource InvertedBoolConverter}}" Text="LED On" Command="{Binding LEDOnCommand}" SemanticProperties.Hint="Turn LED on" />
+                    <ctrls:HapticButton IsEnabled="{Binding InputIsBlocked, Converter={StaticResource InvertedBoolConverter}}"  Text="LED Off" Command="{Binding LEDOffCommand}" SemanticProperties.Hint="Turn LED off"/>
+                    <ctrls:HapticButton IsEnabled="{Binding InputIsBlocked, Converter={StaticResource InvertedBoolConverter}}"  Vibrate="False"  Text="Setup" Command="{Binding GoToSettingsPageCommand}" SemanticProperties.Hint="Go to settings"/>
+            </FlexLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+     <StackLayout IsVisible="{Binding IsBusy}" BackgroundColor="#80FFFFFF" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional" >
+            <ActivityIndicator IsRunning="{Binding IsBusy}"  VerticalOptions="CenterAndExpand"/>
+        </StackLayout>
+      </AbsoluteLayout>
+
+</ContentPage>

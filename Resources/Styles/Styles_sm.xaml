@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary 
+            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:Behaviors="clr-namespace:ESP32_Android_Controller.Behaviors;assembly=ESP32_Android_Controller"
+            x:Class="ESP32_Android_Controller.Styles_sm">
+
+    <!--<ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Styles.xaml" />
+    </ResourceDictionary.MergedDictionaries>-->
+
+    <Style x:Key="header-area" TargetType="AbsoluteLayout">
+        <Setter Property="HeightRequest" Value="50"/>
+        <Setter Property="Padding" Value="0,0,0,0"></Setter>
+        <!--<Setter Property="Padding" Value="{StaticResource HeaderOffset}"></Setter>-->
+        <Setter Property="Margin" Value="0"></Setter>
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}"></Setter>
+    </Style>
+
+    <Style x:Key="led-image" TargetType="Image">
+        <Setter Property="WidthRequest" Value="45"/>
+    </Style>
+
+    <Style x:Key="launch-button"  TargetType="Button" BasedOn="{StaticResource BaseButton}">
+        <Setter Property="TextTransform" Value="None"></Setter>
+        <Setter Property="TextColor" Value="AntiqueWhite"></Setter>
+        <Setter Property="FontSize" Value="24"></Setter>
+        <Setter Property="FontAttributes" Value="None"></Setter>
+        <Setter Property="CornerRadius" Value="8"></Setter>
+        <Setter Property="HeightRequest" Value="45"></Setter>
+        <Setter Property="Padding" Value="0"></Setter>
+        <Setter Property="Margin" Value="0"></Setter>
+        <Setter Property="BackgroundColor" Value="{StaticResource DarkBlue}"></Setter>
+    </Style>
+
+    <Style x:Key="transparent-button"  TargetType="Button" BasedOn="{StaticResource launch-button}">
+        <Setter Property="WidthRequest" Value="100"></Setter>
+        <Setter Property="TextColor" Value="{StaticResource GreyTextColor}"></Setter>
+        <Setter Property="BackgroundColor" Value="#00000000"></Setter>
+        <Setter Property="FontAttributes" Value="Bold"></Setter>
+        <Setter Property="BorderColor" Value="{StaticResource LightTrans}"></Setter>
+        <Setter Property="BorderWidth" Value="2"></Setter>
+    </Style>
+
+    <Style x:Key="nav-back-button" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+        <!--<Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="BorderColor" Value="{StaticResource TransOffWhiteText}" />-->
+        <Setter Property="InputTransparent" Value="False" />
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="WidthRequest" Value="65" />
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="Padding" Value="0,0,0,0" />
+        <Setter Property="Margin" Value="-25,-7,0,0" />
+        <Setter Property="Text" Value="&#x2329;" />
+        <Setter Property="FontSize" Value="40" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <Style x:Key="vin-lookup-button" TargetType="Button" BasedOn="{StaticResource launch-button}">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="HeightRequest" Value="28" />
+        <Setter Property="Padding" Value="10,-5,10,-5" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+    </Style>
+
+    <Style TargetType="Image" x:Key="nav-back-image_button">
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="WidthRequest" Value="30" />
+        <Setter Property="HeightRequest" Value="60" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Source" Value="&#x2329;" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="md-button" BasedOn="{StaticResource BaseButton}">
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="WidthRequest" Value="105" />
+        <Setter Property="Padding" Value="10,3" /> 
+        <Setter Property="TextTransform" Value="None" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <Style x:Key="MainOperationButtonStyle"  TargetType="Button">
+        <Setter Property="TextColor" Value="AntiqueWhite" />
+        <Setter Property="BackgroundColor" Value="{StaticResource DarkBlue}" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="HeightRequest" Value="45" />
+        <Setter Property="MinimumWidthRequest" Value="80" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="TextTransform" Value="None"/>
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+    
+    <Style x:Key="micro-text" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Primary}" />
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="FontAttributes" Value="None" />
+    </Style>
+
+    <Style x:Key="grid-text" TargetType="Label">
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="Padding" Value="5,0,5,0" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="FontAttributes" Value="None" />
+    </Style>
+
+    <Style x:Key="grid-header-label" TargetType="Label" BasedOn="{StaticResource grid-text}">
+        <Setter Property="Padding" Value="1,5,1,0" />
+        <Setter Property="BackgroundColor" Value="#ededed" />
+        <Setter Property="TextColor" Value="{StaticResource GreyTextColor}" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="MinimumHeightRequest" Value="20"/>
+    </Style>
+
+    <Style x:Key="grid-label" TargetType="Label" BasedOn="{StaticResource grid-text}">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="HeightRequest" Value="-1"/>
+        <Setter Property="CharacterSpacing" Value="-.1" />
+        <Setter Property="LineHeight" Value="-1" />
+    </Style>
+    
+    <Style x:Key="grid-target-label" TargetType="Label" BasedOn="{StaticResource grid-label}">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="CharacterSpacing" Value="-.7" />
+    </Style>
+
+    <Style x:Key="title-label" TargetType="Label" BasedOn="{StaticResource grid-text}">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="HeightRequest" Value="22"/>
+    </Style>
+
+    <Style x:Key="grid-title-label" TargetType="Label" BasedOn="{StaticResource grid-text}">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="HeightRequest" Value="24"/>
+        <Setter Property="LineHeight" Value="-1"/>
+        <Setter Property="CharacterSpacing" Value="-.95"/>
+        <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+
+    <Style x:Key="mini-message" TargetType="Label">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="TextColor" Value="AntiqueWhite"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="FontAttributes" Value="None"/>
+        <Setter Property="LineBreakMode" Value="WordWrap"/>
+    </Style>
+
+    <Style x:Key="FrontPageLabel"  TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Dark}" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="HeightRequest" Value="-1" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="page-header-title-label" TargetType="Label" >
+        <Setter Property="TextColor" Value="{StaticResource OffWhiteText}" />
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="HeightRequest" Value="-1"/>
+        <Setter Property="LineHeight" Value="-1"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+    </Style>
+
+    <Style x:Key="settings-label" TargetType="Label" >
+        <Setter Property="TextColor" Value="{StaticResource LightTextColor}" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="Padding" Value="5,0,5,0" />
+        <Setter Property="HeightRequest" Value="-1"/>
+        <Setter Property="LineHeight" Value="-1"/>
+    </Style>
+
+    <Style x:Key="about-app-name-label" TargetType="Label" >
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <Style x:Key="about-app-version-label" TargetType="Label" >
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontAttributes" Value="None" />
+    </Style>
+    
+    <Style x:Key="alt-label" TargetType="Label" >
+        <Setter Property="TextColor" Value="{StaticResource Dark}" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="Padding" Value="5,0,5,0" />
+        <Setter Property="HeightRequest" Value="-1"/>
+
+        <Setter Property="VerticalOptions" Value="Center"/>
+        
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+
+                            <Setter Property="TextColor" Value="{StaticResource Dark}" />
+
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Focused">
+                        <VisualState.Setters>
+
+                            <!--<Setter Property="BackgroundColor" Value="Lime" />-->
+
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{StaticResource DarkTrans}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style TargetType="CheckBox">
+        <Setter Property="Color" Value="{StaticResource Dark}" />
+        <Setter Property="Scale" Value="1.7"></Setter>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="IsChecked">
+                        <VisualState.Setters>
+                            <Setter Property="Color" Value="{StaticResource Dark}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+
+                            <Setter Property="Color" Value="{StaticResource Dark}" />
+
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Focused">
+                        <VisualState.Setters>
+
+                            <Setter Property="Color" Value="{StaticResource Dark}" />
+
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="Color" Value="{StaticResource DarkTrans}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Blue" TargetType="StackLayout">
+        <Setter Property="BackgroundColor" Value="{StaticResource Accent}"></Setter>
+        <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
+        <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+        <Setter Property="Orientation" Value="Vertical"></Setter>
+    </Style>
+
+    <Style x:Key="base-picker" TargetType="Picker">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontAttributes" Value="None" />
+    </Style>
+    
+    <Style x:Key="codes-picker" TargetType="Picker" BasedOn="{StaticResource base-picker}">
+        <Setter Property="TextColor" Value="{StaticResource Black}" />
+        <Setter Property="TitleColor" Value="{StaticResource DarkBlue}" />
+    </Style>
+    
+    <Style x:Key="settings-picker" TargetType="Picker" BasedOn="{StaticResource base-picker}">
+        <Setter Property="TextColor" Value="{StaticResource Black}" />
+    </Style>
+    
+    <Style x:Key="nested-settings-picker" TargetType="Picker" BasedOn="{StaticResource base-picker}">
+        <Setter Property="TextColor" Value="{StaticResource Black}" />
+        <Setter Property="BackgroundColor" Value="LightGray" />
+        
+        <Setter Property="TitleColor" Value="{StaticResource DarkBlue}" />
+    </Style>
+
+    <!-- Entry -->
+    <Style TargetType="Entry">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="TextColor" Value="{StaticResource LightBlue}" />
+    </Style>
+    
+    <Style x:Key="HEXEntry" TargetType="Entry">
+        <Style.Setters>
+            <Setter Property="Behaviors:HexValidationBehavior.AttachBehavior" Value="true" />
+            <Setter Property="Behaviors:HexValidationBehavior.DefaultTextColor" Value="{StaticResource LightBlue}" />
+            <Setter Property="TextTransform" Value="Uppercase" />
+            <!--<Setter Property="BackgroundColor" Value="#FFFFFF" />-->
+            <!--<Setter Property="WidthRequest" Value="30" />-->
+        </Style.Setters>
+    </Style>
+
+
+</ResourceDictionary>
