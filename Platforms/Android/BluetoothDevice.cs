@@ -6,14 +6,14 @@ using ESP32_Android_Controller.Interfaces;
 
 namespace ESP32_Android_Controller.PartialClasses;
 
-public partial class AndroidBlueToothDevice : IBlueToothService, ICommunicationDevice
+public partial class BluetoothDevice : IBlueToothService, ICommunicationDevice
 {
 
     // ELM327 uart rx buffer is 512 bytes
     public const int BUFFER_SIZE = 2048;
     public event BluetoothEvent DeviceEvent;
 
-    private BluetoothDevice bluetoothDevice = null;
+    private Android.Bluetooth.BluetoothDevice bluetoothDevice = null;
     private BluetoothSocket bluetoothSocket = null;
     private BluetoothAdapter bluetoothAdapter = null;
     private byte[] RespBuffer = new byte[BUFFER_SIZE];
@@ -22,7 +22,7 @@ public partial class AndroidBlueToothDevice : IBlueToothService, ICommunicationD
     private CancellationToken _cancelReadToken;
     private Action tokenCancelOperation = null;
 
-    public AndroidBlueToothDevice()
+    public BluetoothDevice()
     {
         this._cancelReadToken = this.tokenSource.Token;
         tokenCancelOperation = this.NullFunction;

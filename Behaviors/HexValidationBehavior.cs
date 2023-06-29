@@ -93,7 +93,7 @@ namespace ESP32_Android_Controller.Behaviors
 
             if (!isValid)// || r == oldVal)
             {
-                entry.TextColor = Color.FromHex("CC2222");
+                entry.TextColor = Color.FromArgb("CC2222");
                 if (string.IsNullOrEmpty(args.OldTextValue))
                 {
                     entry.Text = string.Empty;

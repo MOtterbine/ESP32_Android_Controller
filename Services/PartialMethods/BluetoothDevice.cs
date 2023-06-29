@@ -7,7 +7,7 @@ namespace ESP32_Android_Controller.PartialClasses;
 
 
 
-public partial class AndroidBlueToothDevice 
+public partial class BluetoothDevice 
 {
 
  
