@@ -241,7 +241,7 @@ namespace ESP32_Android_Controller.ViewModels
 
                 if (this._BluetoothService == null)
                 {
-                    this._BluetoothService = new ESP32_Android_Controller.Services.PartialMethods.AndroidBlueToothDevice();
+                    this._BluetoothService = new ESP32_Android_Controller.PartialClasses.AndroidBlueToothDevice() as IBlueToothService;
                 }
 
 

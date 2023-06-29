@@ -4,9 +4,9 @@ using Android.Bluetooth;
 using Communication;
 using ESP32_Android_Controller.Interfaces;
 
-namespace ESP32_Android_Controller.Services.PartialMethods;
+namespace ESP32_Android_Controller.PartialClasses;
 
-public partial class AndroidBlueToothDevice : IBlueToothService
+public partial class AndroidBlueToothDevice : IBlueToothService, ICommunicationDevice
 {
 
     // ELM327 uart rx buffer is 512 bytes

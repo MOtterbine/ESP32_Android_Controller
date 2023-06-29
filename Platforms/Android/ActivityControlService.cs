@@ -1,7 +1,6 @@
 ﻿using Android.Content.Res;
 using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
 using ESP32_Android_Controller.Interfaces;
-using ESP32_Android_Controller.Interfaces;
 
 
 
@@ -9,7 +8,7 @@ namespace ESP32_Android_Controller.PartialClasses;
 
 public partial class ActivityControlService : IPlatformAppControl
 {
-    public partial void Close()
+    void IPlatformAppControl.Close()
     {
         Microsoft.Maui.ApplicationModel.Platform.CurrentActivity.FinishAndRemoveTask();
 
@@ -23,25 +22,25 @@ public partial class ActivityControlService : IPlatformAppControl
     double IPlatformAppControl.ScreenDensity => Resources.System.DisplayMetrics.Density;
     int IPlatformAppControl.ScreenDPI => (int)(DeviceDisplay.Current.MainDisplayInfo.Width/DeviceDisplay.Current.MainDisplayInfo.Density);
 
-    public partial void RequestPermissions(string[] permissions, int requestID)
+    void IPlatformAppControl.RequestPermissions(string[] permissions, int requestID)
     {
         Platform.CurrentActivity.RequestPermissions(permissions, requestID);
     }
 
-    public partial bool CheckSelfPermission(string permission)
+    bool IPlatformAppControl.CheckSelfPermission(string permission)
     {
 
         var j = Platform.CurrentActivity.CheckSelfPermission(permission);
         return j == 0;
     }
 
-    public partial void ConfigureUI()
+    void IPlatformAppControl.ConfigureUI()
     {
         // allows for scrolling when android keyboard impinges on the screen
         // Microsoft.Maui.Controls.Application.Current.On<Microsoft.Maui.Controls.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
     }
 
-    public partial void InvokeHapticFeedback()
+    void IPlatformAppControl.InvokeHapticFeedback()
     {
         try
         {
