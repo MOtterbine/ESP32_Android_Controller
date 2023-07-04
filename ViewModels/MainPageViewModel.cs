@@ -10,19 +10,6 @@ namespace ESP32_Android_Controller.ViewModels;
 public class MainPageViewModel : ViewModelBase, IViewModel
 {
 
-    // CollectionView CommandListCollection = null;
-
-
-    //CollectionView CommandList = new CollectionView
-    //        {
-    //            ItemsSource = new List<SimpleCommand> {
-    //    new SimpleCommand("LED On","AT01"),
-    //    new SimpleCommand("LED Off","AT02"),
-    //    new SimpleCommand("Get Version","ATV"),
-    //    new SimpleCommand("Reset","ATZ")
-    //}
-    //};
-
     public List<SimpleCommand> CommandList => this._commands;
     private List<SimpleCommand> _commands = new List<SimpleCommand> {
         new SimpleCommand("LED On","AT01"),
@@ -191,7 +178,7 @@ public class MainPageViewModel : ViewModelBase, IViewModel
                 CancelCommTimout();
                 this.comDev.CommunicationEvent -= OnCommEvent;
                 //StatusDescription = "Disconnected";
-                this.inputIsBlocked = false;
+                this.InputIsBlocked = false;
                 break;
             case CommunicationEvents.Error:
                 this.comDev.CommunicationEvent -= OnCommEvent;
