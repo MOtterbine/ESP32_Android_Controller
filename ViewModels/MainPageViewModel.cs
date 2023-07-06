@@ -12,12 +12,12 @@ public class MainPageViewModel : ViewModelBase, IViewModel
 
     public List<SimpleCommand> CommandList => this._commands;
     private List<SimpleCommand> _commands = new List<SimpleCommand> {
-        new SimpleCommand("LED On","AT01"),
-        new SimpleCommand("LED Off","AT02"),
-        new SimpleCommand("Get Device Name","ATN"),
-        new SimpleCommand("Get LED Status","ATS"),
-        new SimpleCommand("Get Version","ATV"),
-        new SimpleCommand("Reset","ATZ")
+        new SimpleCommand("LED On","AT01\r"),
+        new SimpleCommand("LED Off","AT02\r"),
+        new SimpleCommand("Get Device Name","ATN\r"),
+        new SimpleCommand("Get LED Status","ATS\r"),
+        new SimpleCommand("Get Version","ATV\r"),
+        new SimpleCommand("Reset","ATZ\r")
     };
     public SimpleCommand SelectedCommand
     {

@@ -212,9 +212,9 @@ namespace ESP32_Android_Controller.ViewModels
             }
         }
 
-        public IList<string> DeviceList => this._BluetoothService.GetDeviceList(); 
-     
-        
+        public IList<string> DeviceList => this._BluetoothService.GetDeviceList();
+
+
         public void SelectDevice1()
         { 
 
@@ -239,18 +239,13 @@ namespace ESP32_Android_Controller.ViewModels
         public void SetCommMethod()
         {
 
-                if (this._BluetoothService == null)
-                {
-                    this._BluetoothService = new ESP32_Android_Controller.PartialClasses.BluetoothDevice() as IBlueToothService;
-                }
-
-
+            if (this._BluetoothService == null)
+            {
+                this._BluetoothService = new ESP32_Android_Controller.PartialClasses.BluetoothDevice() as IBlueToothService;
+            }
 
             if (this.IsBluetooth)
             {
-
-
-
 
                     this._CommunicationService = this._BluetoothService as ICommunicationDevice;
                     this.selectedBluetoothDevice = Preferences.Get(Constants.PREFS_KEY_BLUETOOTH_DEVICE, string.Empty);
